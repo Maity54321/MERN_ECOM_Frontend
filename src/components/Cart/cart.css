@@ -1,0 +1,21 @@
+.btn-shadow{
+    margin-top: 20px;
+    /* background-color: rgb(180, 3, 180); */
+    padding: 17px;
+    width: max-content;
+    border-radius: 30px;
+    margin-left: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    font-family: roboto;
+    /* color:snow; */
+    border:none;
+    box-shadow: 6px 6px 13px white,
+    6px 6px 13px purple;
+    cursor: default;
+}
+
+.btn-shadow-click{
+        box-shadow: inset -6px -6px 13px white,
+    inset 6px 6px 13px black;
+}

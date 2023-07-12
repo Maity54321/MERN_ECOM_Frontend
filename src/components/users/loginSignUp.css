@@ -1,0 +1,19 @@
+.signupForm{
+    transform: translateY(-100%) translateX(100%);
+}
+
+.backNormalForm{
+    transform: translateY(0%) translateX(-100%);
+}
+.backNormal{
+    transform: translateX(0%);
+}
+.signupShiftLeft{
+    transform: translateX(0%) translateY(-100%);
+}
+.loginShiftLeft{
+    transform: translateX(-100%);
+}
+.shiftRight{
+    transform: translateX(100%);
+}

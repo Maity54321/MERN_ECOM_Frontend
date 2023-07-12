@@ -1,0 +1,15 @@
+.loading{
+    height:150px;
+    width: 150px;
+    background-color: white;
+    border-radius: 50%;
+    border-bottom: 5px solid purple;
+    animation: loading  800ms  infinite linear;
+}
+@keyframes loading {
+
+    to{
+        transform: rotateZ(360deg);
+    }
+    
+}
