@@ -1,7 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import WebFont from "webfontloader";
+// import WebFont from "webfontloader";
 import React, { useEffect, useState } from "react";
 import Footer from "./components/Footer";
 import Home from "./components/Home/Home";
@@ -37,11 +37,11 @@ function App() {
   // }
 
   useEffect(() => {
-    WebFont.load({
-      google: {
-        families: ["Roboto"],
-      },
-    });
+    // WebFont.load({
+    //   google: {
+    //     families: ["Roboto"],
+    //   },
+    // });
     window.scrollTo(0, 0);
     const token = localStorage.getItem("token");
     if (token) {
