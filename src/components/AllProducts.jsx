@@ -69,8 +69,8 @@ const AllProducts = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex flex-row">
-          <div className="border border-solid border-gray-400 mt-24 md:w-64 w-full h-96 z-[1]">
+        <div className="flex md:flex-row flex-col">
+          <div className="border border-solid border-gray-400 mt-24 md:w-64 w-full h-96 z-[1] md:block hidden">
             <Typography align="center" variant="h6">
               Price
             </Typography>
