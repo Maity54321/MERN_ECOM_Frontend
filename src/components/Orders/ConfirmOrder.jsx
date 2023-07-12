@@ -78,7 +78,7 @@ const ConfirmOrder = ({ user }) => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="flex flex-row mt-20 w-full">
+        <div className="flex md:flex-row flex-col mt-20 w-full">
           <div className="flex flex-col w-[100%]">
             <div className="flex flex-col p-10">
               <b className="text-3xl">Shipping Info</b>
@@ -120,7 +120,7 @@ const ConfirmOrder = ({ user }) => {
               </div>
             </div>
           </div>
-          <div className="border-r-0 border-t-0 border-b-0 border-l border-solid w-[30%] flex flex-col items-center justify-center p-5">
+          <div className="border-r-0 border-t-0 border-b-0 md:border-l border-l-0 border-solid md:w-[30%] flex flex-col items-center justify-center md:p-5 w-[90%] ms-3">
             <b className="text-3xl">Order Summery</b>
             <hr className="bg-black w-full" />
             <div className="flex flex-row justify-between w-full p-3 text-xl">
