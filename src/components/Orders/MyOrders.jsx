@@ -15,7 +15,7 @@ const MyOrders = () => {
       console.log(res.data.orders);
       setUserOrders(res.data.orders);
     });
-    console.log(data);
+    // console.log(data);
   };
 
   if (!localStorage.getItem("token")) {
@@ -37,7 +37,7 @@ const MyOrders = () => {
       ) : (
         <div className="container flex flex-col items-center h-screen md:mt-0 mt-20 md:w-full w-max">
           <div className="flex md:flex-row md:w-5/6 md:justify-evenly md:items-center text-xl h-max bg-purple-800 text-white text-center w-full">
-            <div className="md:w-full w-[50vw]">Order Id</div>
+            <div className="md:w-full w-[60vw]">Order Id</div>
             <div className="md:w-full w-[50vw]">Status</div>
             <div className="md:w-full w-[50vw]">Items quantity</div>
             <div className="md:w-full w-[50vw]">Amount</div>
@@ -49,7 +49,7 @@ const MyOrders = () => {
                 className="flex md:flex-row md:justify-evenly text-center text-xl even:bg-slate-500"
                 key={item._id}
               >
-                <div className="md:w-full w-[50vw]">{item._id}</div>
+                <div className="md:w-full w-[60vw]">{item._id}</div>
                 <div
                   className={`md:w-full w-[50vw] ${
                     item.orderStatus === "Processing"
