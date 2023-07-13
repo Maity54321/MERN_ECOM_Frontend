@@ -27,10 +27,6 @@ const AllProducts = () => {
 
   const { keyword } = useParams();
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
-
   const products = async () => {
     const result = await getProducts(keyword, price, category);
     setAllProducts(result.data);
@@ -41,26 +37,12 @@ const AllProducts = () => {
     // console.log(allProducts)
   }, [keyword, price, category]);
 
-  // const handleRating = (val) => {
-  //   const options = {
-  //     edit: false,
-  //     color: "rgba(30,30,30,0.5)",
-  //     activeColor: "Purple",
-  //     size: window.innerWidth > 650 ? 25 : 20,
-  //     value: val,
-  //     isHalf: true,
-  //   };
-  //   return options;
-  // };
-
   const handleCategory = (cat) => {
     setCategory(cat);
-    // console.log(cat);
   };
 
   const priceHandler = (event, newPrice) => {
     setPrice(newPrice);
-    // console.log(price);
   };
 
   return (
