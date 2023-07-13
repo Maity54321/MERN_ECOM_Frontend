@@ -14,8 +14,8 @@ const MyOrders = () => {
     const { data } = myAllOrders().then((res) => {
       console.log(res.data.orders);
       setUserOrders(res.data.orders);
+      setLoading(false);
     });
-    // console.log(data);
   };
 
   if (!localStorage.getItem("token")) {
@@ -24,9 +24,9 @@ const MyOrders = () => {
 
   useEffect(() => {
     myOrders();
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 2000);
   }, []);
 
   return (

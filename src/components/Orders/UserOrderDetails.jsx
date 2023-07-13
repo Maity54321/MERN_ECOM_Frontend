@@ -17,6 +17,7 @@ const UserOrderDetails = () => {
       await getUserOrderDetails(id).then((res) => {
         console.log(res.data.order);
         setOrderDetails(res.data.order);
+        setLoading(false);
       });
     } catch (error) {
       return toast.error(error.response.data, {
@@ -28,9 +29,9 @@ const UserOrderDetails = () => {
 
   useEffect(() => {
     userOerderDetails(id);
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    // setTimeout(() => {
+    //   setLoading(false);
+    // }, 5000);
   }, [id]);
 
   if (!localStorage.getItem("token")) {

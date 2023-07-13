@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { getParticularProduct } from "../services/productService";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import ReactStars from "react-rating-stars-component";
 import { createCart } from "../services/cartService";
 import Loading from "./Loading/Loading";
 import Metadata from "./Metadata";
+import { CgArrowLongLeftR } from "react-icons/cg";
+import { BiCartAdd } from "react-icons/bi";
+import { AiTwotoneThunderbolt } from "react-icons/ai";
 
 function ParicularProduct() {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 2000);
 
   useEffect(() => {
     try {
       getParticularProduct(id).then((response) => {
         setProduct(response.data.product);
+        setLoading(false);
       });
     } catch (error) {
       console.log(error.response.data);
@@ -63,6 +68,10 @@ function ParicularProduct() {
     }
   };
 
+  const handleBuyNow = () => {
+    navigate("/shipping");
+  };
+
   return (
     <>
       <Metadata title={`${product.name} Details`} />
@@ -81,20 +90,29 @@ function ParicularProduct() {
               <div className="flex flex-row justify-evenly mt-2">
                 <Link
                   to={localStorage.getItem("token") ? "/cart" : "/account"}
-                  className="p-3 border border-solid w-full text-center font-bold text-xl rounded-full duration-700 bg-purple-800 text-white cursor-pointer hover:bg-white hover:text-purple-800 no-underline"
+                  className="p-3 border border-solid w-full text-center font-bold text-lg rounded-full duration-700 bg-purple-800 text-white cursor-pointer hover:bg-white hover:text-purple-800 no-underline flex items-center justify-center"
                   onClick={addToCart}
                 >
-                  Add To Cart
+                  Add To Cart &nbsp;
+                  <span className="h-full flex items-center justify-center">
+                    <BiCartAdd className="text-2xl" />
+                  </span>
                 </Link>
-                <div className="p-3 border border-solid w-full text-center font-bold text-xl rounded-full duration-500 bg-purple-800 text-white cursor-pointer hover:bg-white hover:text-purple-800">
-                  Buy Now
+                <div
+                  className="p-3 border border-solid w-full font-bold text-xl rounded-full duration-700 bg-purple-800 text-white cursor-pointer hover:bg-white hover:text-purple-800 flex items-center justify-center"
+                  onClick={handleBuyNow}
+                >
+                  Buy Now &nbsp;
+                  <span className="h-full flex items-center justify-center">
+                    <AiTwotoneThunderbolt className="text-2xl" />
+                  </span>
                 </div>
               </div>
             </div>
             <div className="flex flex-col md:ms-5 w-full justify-evenly">
               <div className="font-bold text-xl w-full">{product.name}</div>
               <div className="w-full mt-2 text-xl">
-                <div className="font-bold text-xl text-blue-700 font-roboto shadow-lg w-fit p-2">
+                <div className="font-bold text-xl text-blue-700 font-roboto w-fit p-2">
                   Product Description :
                 </div>
                 {product.description}
@@ -102,7 +120,7 @@ function ParicularProduct() {
 
               <div className="flex md:flex-row flex-col mt-2">
                 <div className="font-bold text-xl text-blue-700 font-roboto w-fit p-2 flex flex-row">
-                  Price:{" "}
+                  Price:
                   <span className="font-bold text-3xl text-black ms-2">
                     ₹{product.price}
                   </span>
@@ -136,8 +154,8 @@ function ParicularProduct() {
                 </div>
               </div>
               <div className="flex flex-row mt-2">
-                <div className="p-1 shadow-lg text-blue-700 font-bold text-lg">
-                  Rating:{" "}
+                <div className="p-1 text-blue-700 font-bold text-lg">
+                  Rating:
                 </div>
                 <ReactStars {...handleRating(product.rating)} />
               </div>

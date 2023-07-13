@@ -10,7 +10,7 @@ import Metadata from "../Metadata";
 
 const Cart = ({ user }) => {
   const [item, setItem] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   // let [totalAmount, setTotalAmount] = useState(0);
   const shopping = useRef(null);
   const navigate = useNavigate();
@@ -20,6 +20,7 @@ const Cart = ({ user }) => {
     try {
       const res = await getCartItems().then((response) => {
         setItem(response.data[0].cartItems);
+        setLoading(false);
       });
     } catch (error) {
       console.log(error.response.data);
@@ -70,7 +71,9 @@ const Cart = ({ user }) => {
   // console.log(item);
 
   if (user && item.length !== 0) {
-    return (
+    return loading ? (
+      <Loading />
+    ) : (
       <>
         <Metadata title={`${user.name}'s Cart`} />
         <div className="md:flex flex-row mt-24 text-2xl justify-evenly hidden">
@@ -81,52 +84,44 @@ const Cart = ({ user }) => {
           <div>Total Item Price</div>
           <div>Action</div>
         </div>
-        {loading ? (
-          <Loading />
-        ) : (
-          item.map((cartItem) => (
-            <div
-              className="flex flex-col w-full md:mt-0 mt-20"
-              key={cartItem.product._id}
-            >
-              <div className="grid md:grid-cols-6 grid-cols-2 gap-4 md:gap-0 items-center text-center pt-2 pb-2 shadow-md shadow-black">
-                <div className="h-56 grid place-items-center">
-                  <img
-                    src={cartItem.product.images?.imgUrl}
-                    alt="image"
-                    className="md:h-46 h-36 max-w-full"
-                  />
-                </div>
-                <div className="md:text-lg font-bold text-xl md:h-auto h:56 truncation">
-                  {cartItem.product.name}
-                </div>
-                <div className="text-4xl font-bold">
-                  ₹ {cartItem.product.price}
-                </div>
-                <div className="">
-                  <div className="text-3xl font-bold md:pe-16">
-                    {cartItem.quantity}
-                  </div>
-                </div>
-                <div
-                  className="text-4xl font-bold"
-                  ref={tot}
-                  // value={cartItem.product.price * cartItem.quantity}
-                >
-                  {cartItem.product.price * cartItem.quantity}
-                </div>
-                <div className="text-4xl text-red-600 cursor-pointer ">
-                  <BsFillTrash2Fill
-                    onClick={() => {
-                      handleRemoveItem(cartItem._id);
-                    }}
-                  />
-                  {/* {console.log(cartItem._id)} */}
+
+        {item.map((cartItem) => (
+          <div
+            className="flex flex-col w-full md:mt-0 mt-20"
+            key={cartItem.product._id}
+          >
+            <div className="grid md:grid-cols-6 grid-cols-2 gap-4 md:gap-0 items-center text-center pt-2 pb-2 shadow-md shadow-black">
+              <div className="h-56 grid place-items-center">
+                <img
+                  src={cartItem.product.images?.imgUrl}
+                  alt="image"
+                  className="md:h-46 h-36 max-w-full"
+                />
+              </div>
+              <div className="md:text-lg font-bold text-xl md:h-auto h:56 truncation">
+                {cartItem.product.name}
+              </div>
+              <div className="text-4xl font-bold">
+                ₹ {cartItem.product.price}
+              </div>
+              <div className="">
+                <div className="text-3xl font-bold md:pe-16">
+                  {cartItem.quantity}
                 </div>
               </div>
+              <div className="text-4xl font-bold" ref={tot}>
+                {cartItem.product.price * cartItem.quantity}
+              </div>
+              <div className="text-4xl text-red-600 cursor-pointer ">
+                <BsFillTrash2Fill
+                  onClick={() => {
+                    handleRemoveItem(cartItem._id);
+                  }}
+                />
+              </div>
             </div>
-          ))
-        )}
+          </div>
+        ))}
 
         <div className="mt-5 grid grid-cols-6 w-full place-items-end gap-5">
           <div className="text-4xl font-bold col-span-4">Total Amount:</div>
