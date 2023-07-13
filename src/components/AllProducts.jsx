@@ -30,6 +30,7 @@ const AllProducts = () => {
   const products = async () => {
     const result = await getProducts(keyword, price, category);
     setAllProducts(result.data);
+    setLoading(false);
   };
 
   useEffect(() => {
