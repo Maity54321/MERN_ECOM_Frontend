@@ -36,14 +36,6 @@ function Navbars() {
         <div className="place-self-center text-center md:w-1/3 w-1/2 text-xl">
           Welcome Admin
         </div>
-        <div className="flex flex-row place-self-end w-1/3 place-content-end">
-          <button
-            onClick={logout}
-            className="p-2 w-28 border-none bg-transparent text-white hover:bg-white hover:text-purple-800 hover:rounded-full hover:shadow-md hover:shadow-black duration-700 cursor-pointer justify-end items-end"
-          >
-            Logout
-          </button>
-        </div>
       </div>
       <div className="flex md:flex-row flex-col gap-3 bg-purple-700 md:w-4/5 w-4/5 me-0 ms-auto md:me-auto text-white p-2">
         <div className="place-self-end">
@@ -58,7 +50,7 @@ function Navbars() {
           </div>
         </div>
         <div className="md:flex md:flex-row gap-3 hidden" ref={dropdown}>
-        <div className="text-end">
+          <div className="text-end">
             <NavLink
               to="/account"
               style={activate}
@@ -95,7 +87,7 @@ function Navbars() {
               style={activate}
               onClick={showHide}
             >
-             View All Products
+              View All Products
             </NavLink>
           </div>
         </div>
