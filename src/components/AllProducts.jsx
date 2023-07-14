@@ -44,7 +44,7 @@ const AllProducts = () => {
   }, [keyword, price, category]);
 
   const handleCategory = (cat) => {
-    setLoading(true);
+    cat === category || category === "" ? setLoading(false) : setLoading(true);
     setCurrentPage(1);
     if (cat === "All") return setCategory("");
     setCategory(cat);
