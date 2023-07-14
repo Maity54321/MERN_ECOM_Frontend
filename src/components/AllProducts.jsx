@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Metadata from "./Metadata";
 import Loading from "./Loading/Loading";
 
-const categories = ["Mobiles", "Monitors", "Laptops"];
+const categories = ["All", "Mobiles", "Monitors", "Laptops"];
 
 const AllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
@@ -28,17 +28,25 @@ const AllProducts = () => {
   const { keyword } = useParams();
 
   const products = async () => {
-    const result = await getProducts(keyword, price, category);
-    setAllProducts(result.data);
-    setLoading(false);
+    try {
+      const result = await getProducts(keyword, price, category);
+      setAllProducts(result.data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.response.data);
+    }
   };
 
   useEffect(() => {
     products();
+    window.scrollTo(0, 0);
     // console.log(allProducts)
   }, [keyword, price, category]);
 
   const handleCategory = (cat) => {
+    setLoading(true);
+    setCurrentPage(1);
+    if (cat === "All") return setCategory("");
     setCategory(cat);
   };
 

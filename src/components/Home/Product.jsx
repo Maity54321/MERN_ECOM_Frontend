@@ -81,11 +81,8 @@
 
 import React, { useEffect, useState } from "react";
 import { getProducts, getImages } from "../../services/productService";
-import { useParams } from "react-router-dom";
-import ReactStars from "react-rating-stars-component";
-// import  Pagination  from '../common/Pagination';
 import Records from "./Records";
-import Pagination from "react-js-pagination";
+import Loading from "../Loading/Loading";
 
 const Product = () => {
   const [products, setProducts] = useState([]);
@@ -98,12 +95,11 @@ const Product = () => {
   const currentRecords = products.slice(indexOfFirstRecord, indexOfLastRecord);
   // const totalPages = Math.ceil(products.length / recordsPerPage);
 
-
-
   const getAllProducts = async () => {
     // console.log(keyword);
     const res = await getProducts();
     setProducts(res.data);
+    setLoading(false);
   };
   useEffect(() => {
     getAllProducts();
@@ -113,28 +109,13 @@ const Product = () => {
 
   return (
     <>
-      <div className="md:grid md:grid-cols-4 md:w-10/12 md:ms-32" >
-        <Records data={currentRecords} />
-      </div>
-      {/* <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      /> */}
-      {/* <Pagination
-        activePage={currentPage}
-        itemsCountPerPage={recordsPerPage}
-        totalItemsCount={products.length}
-        onChange={setCurrentPage}
-        nextPageText={"Next"}
-        prevPageText={"Prev"}
-        firstPageText={"1st"}
-        lastPageText={"Last"}
-        itemClass="page-item"
-        linkClass="page-link"
-        activeClass="pageItemActive"
-        activeLinkClass="pageLinkActive"
-      /> */}
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className="md:grid md:grid-cols-4 md:w-10/12 md:ms-32">
+          <Records data={currentRecords} />
+        </div>
+      )}
     </>
   );
 };

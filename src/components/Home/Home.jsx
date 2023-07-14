@@ -4,8 +4,8 @@ import { BsFillMouseFill } from "react-icons/bs";
 import Product from "./Product";
 import Metadata from "../Metadata";
 import { Link } from "react-router-dom";
-function Home() {
 
+function Home() {
   return (
     <>
       <Metadata title="Techworld" />
