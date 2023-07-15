@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getProducts } from "../services/productService";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Records from "./Home/Records";
 import Pagination from "react-js-pagination";
 import Slider from "@mui/material/Slider";
