@@ -11,7 +11,6 @@ import Metadata from "../Metadata";
 const Cart = ({ user }) => {
   const [item, setItem] = useState([]);
   const [loading, setLoading] = useState(true);
-  // let [totalAmount, setTotalAmount] = useState(0);
   const shopping = useRef(null);
   const navigate = useNavigate();
   const tot = useRef(null);
@@ -23,13 +22,13 @@ const Cart = ({ user }) => {
         setLoading(false);
       });
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
     }
   };
 
   useEffect(() => {
     myCart();
-  }, []);
+  }, [item.length]);
 
   //Delete item from cart
 
@@ -70,7 +69,7 @@ const Cart = ({ user }) => {
 
   // console.log(item);
 
-  if (user && item.length !== 0) {
+  if (user && item?.length !== 0) {
     return loading ? (
       <Loading />
     ) : (

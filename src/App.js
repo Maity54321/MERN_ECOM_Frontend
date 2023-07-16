@@ -24,6 +24,8 @@ import ConfirmOrder from "./components/Orders/ConfirmOrder";
 import PaymentSuccess from "./components/Orders/PaymentSuccess";
 import MyOrders from "./components/Orders/MyOrders";
 import UserOrderDetails from "./components/Orders/UserOrderDetails";
+import About from "./components/About";
+import Contact from "./components/Contact";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -89,6 +91,8 @@ function App() {
         <Route path="/paymentsuccess" element={<PaymentSuccess />} />
         <Route path="/orders" element={<MyOrders />} />
         <Route path="/orderdetais/:id" element={<UserOrderDetails />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
