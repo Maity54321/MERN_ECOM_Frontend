@@ -165,15 +165,19 @@ const Cart = ({ user }) => {
     return (
       <>
         <Metadata title={`Your Cart`} />
-        <div className="flex flex-col md:min-h-[500px] min-h-screen justify-center items-center">
-          <MdOutlineRemoveShoppingCart size={100} color="purple" />
-          <h2 className="font-roboto">No Items Added to the Cart</h2>
-          <Link to="/product">
-            <button className="p-3 border border-solid border-purple-800 w-full text-center font-bold text-xl rounded-full duration-700 bg-purple-800 text-white cursor-pointer hover:bg-white hover:text-purple-800 no-underline">
-              Start Shopping
-            </button>
-          </Link>
-        </div>
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="flex flex-col md:min-h-[500px] min-h-screen justify-center items-center">
+            <MdOutlineRemoveShoppingCart size={100} color="purple" />
+            <h2 className="font-roboto">No Items Added to the Cart</h2>
+            <Link to="/product">
+              <button className="p-3 border border-solid border-purple-800 w-full text-center font-bold text-xl rounded-full duration-700 bg-purple-800 text-white cursor-pointer hover:bg-white hover:text-purple-800 no-underline">
+                Start Shopping
+              </button>
+            </Link>
+          </div>
+        )}
       </>
     );
   }

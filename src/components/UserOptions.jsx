@@ -26,16 +26,6 @@ const UserOptions = ({ user, handleLogout }) => {
   ];
 
   const navigate = useNavigate();
-  useEffect(() => {
-    myCart();
-  }, []);
-  if (user.isAdmin) {
-    options.unshift({
-      icon: <RiDashboard2Fill />,
-      name: "Dashboard",
-      func: dashboard,
-    });
-  }
 
   const myCart = async () => {
     try {
@@ -47,6 +37,17 @@ const UserOptions = ({ user, handleLogout }) => {
       // toast.error(error.response.data)
     }
   };
+
+  useEffect(() => {
+    myCart();
+  }, [open]);
+  if (user.isAdmin) {
+    options.unshift({
+      icon: <RiDashboard2Fill />,
+      name: "Dashboard",
+      func: dashboard,
+    });
+  }
 
   function account() {
     navigate("/account");
