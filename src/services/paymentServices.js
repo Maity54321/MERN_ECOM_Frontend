@@ -1,10 +1,10 @@
 import http from "./httpService";
-import { link } from "./link";
+import { devLink } from "./link";
 
 export function checkout(amount) {
-  return http.post(`${link}/api/v1/payment/checkout`, { amount });
+  return http.post(`${devLink}/api/v1/payment/checkout`, { amount });
 }
 
 export function apiKey() {
-  return http.get(`${link}/api/v1/payment/getKey`);
+  return http.get(`${devLink}/api/v1/payment/getKey`);
 }

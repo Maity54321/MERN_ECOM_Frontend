@@ -1,8 +1,8 @@
 import http from "./httpService";
-import { link } from "./link";
+import { devLink } from "./link";
 
 export function registerUser(datas) {
-  return http.post(`${link}/api/v1/users/`, datas, {
+  return http.post(`${devLink}/api/v1/users/`, datas, {
     headers: {
       "content-type": "multipart/form-data",
     },
@@ -10,5 +10,5 @@ export function registerUser(datas) {
 }
 
 export function loginUser(datas) {
-  return http.post(`${link}/api/v1/auth/`, datas);
+  return http.post(`${devLink}/api/v1/auth/`, datas);
 }

@@ -1,9 +1,9 @@
 import http from "./httpService";
-import { link } from "./link";
+import { devLink } from "./link";
 
 export function createCart(cart) {
   http.post(
-    `${link}/api/v1/cart`,
+    `${devLink}/api/v1/cart`,
     { cartItems: cart },
     {
       headers: {
@@ -14,7 +14,7 @@ export function createCart(cart) {
 }
 
 export function getCartItems() {
-  return http.get(`${link}/api/v1/cart`, {
+  return http.get(`${devLink}/api/v1/cart`, {
     headers: {
       authorization: localStorage.getItem("token"),
     },
@@ -22,7 +22,7 @@ export function getCartItems() {
 }
 
 export function deleteItem(id) {
-  return http.delete(`${link}/api/v1/cart/${id}`, {
+  return http.delete(`${devLink}/api/v1/cart/${id}`, {
     headers: {
       authorization: localStorage.getItem("token"),
     },
