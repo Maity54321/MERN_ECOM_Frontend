@@ -1,6 +1,6 @@
 import http from "./httpService";
-import { devLink } from "./link";
+import { APIUrl } from "./link";
 
 export function deleteUser(id) {
-  return http.delete(`${devLink}/api/v1/users/${id}`);
+  return http.delete(`${APIUrl}/api/v1/users/${id}`);
 }

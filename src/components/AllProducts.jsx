@@ -13,7 +13,7 @@ const categories = ["All", "Mobiles", "Monitors", "Laptops"];
 const AllProducts = () => {
   const [allProducts, setAllProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(8);
+  const [recordsPerPage, setRecordsPerPage] = useState(8);
   const [price, setPrice] = useState([0, 99999]);
   const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(true);
@@ -24,6 +24,7 @@ const AllProducts = () => {
     indexOfFirstRecord,
     indexOfLastRecord
   );
+  const [windowDimensions]= useState({width: window.innerWidth,height: window.innerHeight,});
 
   const { keyword } = useParams();
 
@@ -38,6 +39,9 @@ const AllProducts = () => {
   };
 
   useEffect(() => {
+    if(windowDimensions.width>1366){
+      setRecordsPerPage(12)
+    }
     products();
     window.scrollTo(0, 0);
     // console.log(allProducts)
@@ -93,8 +97,8 @@ const AllProducts = () => {
               ))}
             </ul>
           </div>
-          <div className="">
-            <div className="md:grid md:grid-cols-4 mt-16">
+          <div className="w-full">
+            <div className="md:grid md:grid-cols-4 2xl:grid 2xl:grid-cols-6 mt-16">
               <Records data={currentRecords} />
             </div>
             <div className="w-full flex justify-center items-center">

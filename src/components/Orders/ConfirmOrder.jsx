@@ -4,7 +4,7 @@ import { getCartItems } from "../../services/cartService";
 import "./confirmOrder.css";
 import { apiKey, checkout } from "../../services/paymentServices";
 import Loading from "../Loading/Loading";
-import { link } from "../../services/link";
+import { APIUrl } from "../../services/link";
 
 const ConfirmOrder = ({ user }) => {
   const shippingDetais = JSON.parse(localStorage.getItem("shipping"));
@@ -56,7 +56,7 @@ const ConfirmOrder = ({ user }) => {
       image:
         "https://png.pngtree.com/element_pic/16/11/03/dda587d35b48fd01947cf38931323161.jpg",
       order_id: order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-      callback_url: `${link}/api/v1/payment/paymentverification`,
+      callback_url: `${APIUrl}/api/v1/payment/paymentverification`,
       prefill: {
         name: user.name,
         email: user.email,
@@ -105,7 +105,7 @@ const ConfirmOrder = ({ user }) => {
                   >
                     <img
                       src={cartItem.product.images?.imgUrl}
-                      alt="Product Image"
+                      alt="ProductImage"
                       className="w-10"
                     />
                     <div className="text-lg">{cartItem.product.name}</div>

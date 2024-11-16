@@ -88,7 +88,8 @@ const Product = () => {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(true);
-  const [recordsPerPage] = useState(8);
+  const [recordsPerPage, setRecordsPerPage] = useState(8);
+  const [windowDimensions, setWindowDimensions] = useState({width: window.innerWidth,height: window.innerHeight,});
 
   const indexOfLastRecord = currentPage * recordsPerPage;
   const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
@@ -102,6 +103,9 @@ const Product = () => {
     setLoading(false);
   };
   useEffect(() => {
+    if(windowDimensions.width>1366){
+      setRecordsPerPage(12)
+    }
     getAllProducts();
     // console.log(products);
     setLoading(false);
@@ -112,7 +116,7 @@ const Product = () => {
       {loading ? (
         <Loading />
       ) : (
-        <div className="md:grid md:grid-cols-4 md:w-10/12 md:ms-32">
+        <div className="md:grid md:grid-cols-4 2xl:grid 2xl:grid-cols-6 md:w-10/12 md:ms-32">
           <Records data={currentRecords} />
         </div>
       )}
