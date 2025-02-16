@@ -6,11 +6,10 @@ COPY package*.json ./
 
 RUN npm i
 
-RUN npm run build
-
 COPY . .
 
 ENV REACT_APP_MYENV=stg
 
-#Expose Port
-EXPOSE 5000
+RUN npm run build
+
+CMD ["npm", "run", "start"]
