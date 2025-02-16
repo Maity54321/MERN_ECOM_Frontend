@@ -15,6 +15,7 @@ import AdminWelcome from "../Admin/AdminWelcome";
 import { FiMail } from "react-icons/fi";
 import { IoLockOpenOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
+import "./loginSignUp.css";
 
 class Sign extends LogSignForm {
   constructor(props) {
@@ -139,113 +140,53 @@ class Sign extends LogSignForm {
     }
     return (
       <>
-        <div className="w-screen flex items-center justify-center min-h-screen">
-          <div className="md:w-1/3 w-3/4 bg-purple-800 md:h-[40vmax] h-[80vh] border border-solid rounded-3xl overflow-hidden shadow-lg shadow-black">
-            <div className="grid grid-rows-1 grid-cols-2">
-              <div
-                id="login"
-                className="text-center p-3 text-2xl text-white font-roboto cursor-default"
-                onClick={(e) => this.switchTabs(e, "login")}
-              >
-                LogIn
+        <div className="logSign">
+          <div className="main">
+            <input type="checkbox" id="chk" aria-hidden="true"></input>
+            <div className="signup">
+              <form onSubmit={this.handleLoginSubmit}>
+                <label for="chk" aria-hidden="true">Login</label>
+                <div className="flex flex-row w-full">
+                  {this.renderLoginInput("email", "email", "Email")}
+                </div>
+                <div className="flex flex-row w-full">
+                  {this.renderLoginInput("password", "password", "Password")}
+                </div>
+                <button className="cBtn"
+                  type="submit"
+                  disabled={this.logValidate()}
+                >
+                  Login
+                </button>
+              </form>
               </div>
-              <div
-                className="text-center p-3 text-2xl text-white font-roboto cursor-default"
-                onClick={(e) => this.switchTabs(e, "register")}
-              >
-                SignUp
-              </div>
-              <button
-                id="switch"
-                ref={this.switchbtn}
-                className="h-1 rounded-full border-none transition-all duration-500"
-              ></button>
+              <div className="login">
+              <form onSubmit={this.handleRegisterSubmit}>
+                <label for="chk" aria-hidden="true">Sign Up</label>
+                <div className="flex flex-row w-full">
+                  {this.renderRegInput("email", "email", "Email")}
+                </div>
+                <div className="flex flex-row w-full">
+                  {this.renderRegInput("password", "password", "Password")}
+                </div>
+                <div className="flex flex-row w-full">
+                  {this.renderRegInput("name", "text", "Enter Your Name")}
+                </div>
+                <div className="flex flex-row w-full">
+                </div>
+                <input
+                  type="file"
+                  name="image"
+                  id=""
+                  onChange={this.onFileChange}
+                />
+                <button className="cBtn"
+                  type="submit"
+                >
+                  Register
+                </button>
+              </form>
             </div>
-            <form
-              id="loginTab"
-              onSubmit={this.handleLoginSubmit}
-              className="loginForm mt-16 w-full flex flex-col gap-14 items-center justify-evenly transition-all duration-500"
-            >
-              <div className="flex flex-row w-full">
-                <span className="text-2xl pt-4 absolute">
-                  <FiMail className="md:ms-14 ms-9" color="purple" />
-                </span>
-                {this.renderLoginInput("email", "email", "Email")}
-              </div>
-              <div className="flex flex-row w-full">
-                <span className="text-2xl pt-4 absolute">
-                  <IoLockOpenOutline
-                    className="md:ms-14 ms-9 pe-1"
-                    color="purple"
-                  />
-                </span>
-                {this.renderLoginInput("password", "password", "Password")}
-              </div>
-
-              {/* {this.renderInput("name", "text", "Enter Your Name")} */}
-              {/* <input
-                type="submit"
-                value="Login"
-                className="p-2 ms-auto me-auto w-1/2 rounded-lg border-none mt-5 cursor-pointer bg-white text-lg font-cursive hover:bg-slate-200 hover:text-purple-800 text-purple-800 shadow-black shadow-md"
-              /> */}
-              <button
-                type="submit"
-                className="p-2 ms-auto me-auto w-1/2 rounded-lg border-none mt-5 cursor-pointer text-lg font-cursive hover:text-purple-800 text-purple-800 shadow-black shadow-md"
-                disabled={this.logValidate()}
-              >
-                Login
-              </button>
-            </form>
-            <form
-              id="registerTab"
-              onSubmit={this.handleRegisterSubmit}
-              className="signupForm mt-28 w-full flex flex-col gap-10 items-center justify-center transition-all duration-500"
-            >
-              <div className="flex flex-row w-full">
-                <span className="text-2xl pt-4 absolute">
-                  <FiMail className="md:ms-14 ms-9" color="purple" />
-                </span>
-                {this.renderRegInput("email", "email", "Email")}
-              </div>
-              <div className="flex flex-row w-full">
-                <span className="text-2xl pt-4 absolute">
-                  <IoLockOpenOutline className="md:ms-14 ms-9" color="purple" />
-                </span>
-                {this.renderRegInput("password", "password", "Password")}
-              </div>
-              <div className="flex flex-row w-full">
-                <span className="text-2xl pt-4 absolute">
-                  <IoPersonOutline className="md:ms-14 ms-9" color="purple" />
-                </span>
-                {this.renderRegInput("name", "text", "Enter Your Name")}
-              </div>
-              <div className="flex flex-row w-full">
-                <span className="text-2xl pt-4 absolute">
-                  <IoLockOpenOutline
-                    className="md:ms-14 ms-9 pe-1"
-                    color="purple"
-                  />
-                </span>
-                {/* {this.renderLoginInput("image", "file", "Prifile Pic")} */}
-              </div>
-              <input
-                type="file"
-                name="image"
-                id=""
-                onChange={this.onFileChange}
-              />
-              {/* <input
-                type="submit"
-                value="Register"
-                // className="p-2 ms-auto me-auto w-1/2 rounded-lg border-none mt-5 cursor-pointer bg-white text-lg font-cursive hover:bg-slate-200 hover:text-purple-800 text-purple-800 shadow-black shadow-md"
-              /> */}
-              <button
-                type="submit"
-                className="p-2 ms-auto me-auto w-1/2 rounded-lg border-none mt-5 cursor-pointer text-lg font-cursive hover:text-purple-800 text-purple-800 shadow-black shadow-md"
-              >
-                Register
-              </button>
-            </form>
           </div>
         </div>
       </>
