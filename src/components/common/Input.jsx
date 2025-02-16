@@ -1,13 +1,11 @@
 import React from "react";
+import "../users/loginSignUp.css"
 import {FiMail} from "react-icons/fi"
 
 function Input({ name, error, placeholder, type, ...rest }) {
   return (
     <>
-      <div className="w-full flex items-center justify-center">
-      {/* <div className="absolute ms-0"><FiMail color="purple" /></div> */}
         <input
-          className="p-3 ps-10 w-2/3 rounded-lg border-none outline-none font-cursive text-black text-lg shadow-black shadow-md"
           {...rest}
           name={name}
           type={type}
@@ -23,7 +21,6 @@ function Input({ name, error, placeholder, type, ...rest }) {
             </span>
           </div>
         )}
-      </div>
     </>
   );
 }
