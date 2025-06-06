@@ -1,7 +1,7 @@
 import React from 'react'
 import {ReactNavbar} from "overlay-navbar";
 // import reactIcons from "react-icons"
-import logo from '../images/logo.jpg';
+import logo from '../images/newLogo.png';
 // import SearchIcon from './SearchIcon';
 import {FaSearch, FaShoppingCart} from 'react-icons/fa'
 import {CgProfile} from 'react-icons/cg'
