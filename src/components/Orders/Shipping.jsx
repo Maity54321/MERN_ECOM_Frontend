@@ -24,12 +24,40 @@ const Shipping = () => {
   const shippingSchema = {
     address: Joi.string().required().label("Address"),
     city: Joi.string().required().label("City"),
-    pinCode: Joi.number().required().min(100000).max(999999).label("Pin Code"),
+    pinCode: Joi.number().required().min(100000).max(999999).label("Pin Code").error(errors=>{
+      errors.forEach((err) => {
+        switch (err.type) {
+          case "number.min":
+            err.message = "Pin must be at least 6 digits";
+            break;
+          case "number.max":
+            err.message = "Pin must be at least 6 digits";
+            break;
+            default:
+              break;
+        }
+      });
+      return errors;
+    }),
     phone: Joi.number()
       .required()
       .min(1000000000)
       .max(9999999999)
-      .label("Phone Number"),
+      .label("Phone Number").error(errors=>{
+        errors.forEach((err) => {
+          switch (err.type) {
+            case "number.min":
+              err.message = "Phone number must be 10 digits";
+              break;
+            case "number.max":
+              err.message = "Phone number must be 10 digits";
+              break;
+            default:
+              break;
+          }
+        });
+        return errors;
+        }),
     country: Joi.string().label("Country"),
     state: Joi.string().label("State"),
   };
