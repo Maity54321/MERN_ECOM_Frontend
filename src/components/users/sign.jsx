@@ -16,6 +16,7 @@ import { FiMail } from "react-icons/fi";
 import { IoLockOpenOutline } from "react-icons/io5";
 import { IoPersonOutline } from "react-icons/io5";
 import "./loginSignUp.css";
+import ReactDOM from "react-dom/client";
 
 class Sign extends LogSignForm {
   constructor(props) {
@@ -26,6 +27,8 @@ class Sign extends LogSignForm {
   state = {
     regData: { email: "", password: "", name: "" },
     loginData: { email: "", password: "" },
+    btnVal:{signUp:"Register", logIn:"Log In"},
+    loading:false,
     errors: {},
     image: null,
   };
@@ -49,7 +52,9 @@ class Sign extends LogSignForm {
     this.setState({ image: e.target.files[0] });
   };
 
+
   registerSubmit = async () => {
+    this.setState({ loading:true });
     let email = this.state.regData.email;
     let password = this.state.regData.password;
     let name = this.state.regData.name;
@@ -62,24 +67,47 @@ class Sign extends LogSignForm {
     myForm.append("images", image);
     try {
       const res = await registerUser(myForm);
+      if(res){
+        this.setState({ loading:false });
+        // this.setState(prevState=>({loginData:{...prevState.loginData,email:this.state.regData.email, password: this.state.regData.password}})); // Not working this line
+        // this.loginSubmit();
+      }
       console.log("Registered Successfully");
-      toast.success("registered Successfully", { theme: "colored" });
+      toast.success("Registered Successfully", { theme: "colored" });
     } catch (error) {
       // console.log(error.response);
+      this.setState(prevState => ({
+        btnVal: {
+          ...prevState.btnVal,
+          signUp: "Register"
+        }
+      }));
+      this.setState({ loading:false });
       toast.error(error.response.data, { theme: "colored" });
     }
   };
 
   loginSubmit = async () => {
     try {
+      this.setState({ loading:true });
+
+      // debugger;
       const res = await loginUser(this.state.loginData).then((response) => {
         //  console.log(response.data);
         localStorage.setItem("token", response.data);
+        this.setState({ loading:false });
 
         // window.location = "http://localhost:3000";
         history.back();
       });
     } catch (error) {
+      this.setState(prevState => ({
+        btnVal: {
+          ...prevState.btnVal,
+          logIn: "Log In"
+        }
+      }));
+      this.setState({ loading:false });
       // console.log(error.response.data);
       toast.error(error.response.data);
     }
@@ -145,7 +173,7 @@ class Sign extends LogSignForm {
             <input type="checkbox" id="chk" aria-hidden="true"></input>
             <div className="signup">
               <form onSubmit={this.handleLoginSubmit}>
-                <label for="chk" aria-hidden="true">Login</label>
+                <label htmlFor="chk" aria-hidden="true">Login</label>
                 <div className="flex flex-row w-full">
                   {this.renderLoginInput("email", "email", "Email")}
                 </div>
@@ -156,13 +184,13 @@ class Sign extends LogSignForm {
                   type="submit"
                   disabled={this.logValidate()}
                 >
-                  Login
+                  {this.state.loading ? <span className='flex ml-20 justify-center items-center loadingBtn'></span> : this.state.btnVal.logIn}
                 </button>
               </form>
               </div>
               <div className="login">
               <form onSubmit={this.handleRegisterSubmit}>
-                <label for="chk" aria-hidden="true">Sign Up</label>
+                <label htmlFor="chk" aria-hidden="true">Sign Up</label>
                 <div className="flex flex-row w-full">
                   {this.renderRegInput("email", "email", "Email")}
                 </div>
@@ -183,7 +211,7 @@ class Sign extends LogSignForm {
                 <button className="cBtn"
                   type="submit"
                 >
-                  Register
+                  {this.state.loading ? <span className='flex ml-20 justify-center items-center loadingBtn'></span> : this.state.btnVal.signUp}
                 </button>
               </form>
             </div>

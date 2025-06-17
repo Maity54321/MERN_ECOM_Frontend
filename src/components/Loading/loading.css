@@ -13,3 +13,19 @@
     }
     
 }
+
+.loadingBtn{
+    height:30px;
+    width: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    border-bottom: 2px solid white;
+    animation: loading  800ms  infinite linear;
+}
+@keyframes loadingBtn {
+
+    to{
+        transform: rotateZ(360deg);
+    }
+
+}
